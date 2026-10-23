@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alexa TrustLayer — Simulation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Alexa TrustLayer home">
+      <span class="brand-mark">A<span>+</span></span>
+      <span><strong>Alexa TrustLayer</strong><small>SIMULATED EXPERIENCE</small></span>
+    </a>
+    <div class="top-status"><span class="pulse"></span> Local demo <span class="divider">/</span> No Echo connected</div>
+  </header>
+
+  <main class="layout">
+    <section class="intro">
+      <div class="eyebrow"><span class="eyebrow-line"></span> RELIABILITY LAYER / 01</div>
+      <h1>Not just an answer.<br><span>Verified action.</span></h1>
+      <p class="lede">A concept simulation for an Alexa+ enhancement that checks results, recovers from safe failures, and keeps user-approved preferences.</p>
+      <div class="feature-row">
+        <div class="feature-chip"><span class="chip-icon">✓</span> Action verification</div>
+        <div class="feature-chip"><span class="chip-icon">↻</span> Safe recovery</div>
+        <div class="feature-chip"><span class="chip-icon">◈</span> Persistent memory</div>
+      </div>
+    </section>
+
+    <section class="dashboard">
+      <div class="panel conversation-panel">
+        <div class="panel-heading">
+          <div><div class="section-kicker">INTERACTION</div><h2>Talk to Alexa</h2></div>
+          <span class="sim-badge"><span></span> SIMULATOR</span>
+        </div>
+        <div class="scenario-control">
+          <label for="scenario">Demo scenario</label>
+          <select id="scenario">
+            <option value="failure" selected>Failure → successful retry</option>
+            <option value="success">Normal success</option>
+            <option value="unrecoverable">Failure → retry also fails</option>
+          </select>
+        </div>
+        <div class="chat-window" id="chatWindow" aria-live="polite">
+          <div class="message assistant">
+            <div class="avatar">A+</div>
+            <div class="bubble-wrap"><span class="speaker">ALEXA TRUSTLAYER</span><div class="bubble">Hi! Try asking me to turn on the living room lights. The failure scenario deliberately fails once so you can see verification and recovery.</div></div>
+          </div>
+        </div>
+        <form id="chatForm" class="composer">
+          <input id="messageInput" maxlength="300" autocomplete="off" placeholder="Try: Turn on the living room lights…" aria-label="Message Alexa TrustLayer">
+          <button type="submit" aria-label="Send message"><span>Send</span><span class="send-arrow">↗</span></button>
+        </form>
+        <div class="quick-prompts">
+          <button class="prompt" data-prompt="Alexa, turn on the living room lights.">Run failure demo <span>↗</span></button>
+          <button class="prompt" data-prompt="What music do I prefer while studying?">Recall preference <span>↗</span></button>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <section class="panel device-panel">
+          <div class="panel-heading compact">
+            <div><div class="section-kicker">CONNECTED DEVICE</div><h2>Living room</h2></div>
+            <span class="device-icon">⌁</span>
+          </div>
+          <div class="device-card">
+            <div class="bulb-wrap" id="bulb"><svg viewBox="0 0 48 48" role="img" aria-label="Light bulb"><path d="M24 5a14 14 0 0 0-8.8 24.9c1.8 1.5 2.8 3.3 3 5.1h11.6c.2-1.8 1.2-3.6 3-5.1A14 14 0 0 0 24 5Z"/><path d="M19 40h10M20.5 44h7"/></svg></div>
+            <div class="device-info"><strong>Smart light</strong><span id="deviceStatus">Standby · OFF</span></div>
+            <span class="state-pill off" id="devicePill">OFF</span>
+          </div>
+          <div class="device-foot"><span class="tiny-dot"></span><span>Virtual device · simulated state</span></div>
+        </section>
+
+        <section class="panel memory-panel">
+          <div class="panel-heading compact">
+            <div><div class="section-kicker">PERSONALIZATION</div><h2>Saved memory</h2></div>
+            <label class="switch" title="Enable or disable memory"><input type="checkbox" id="memoryToggle" checked><span class="slider"></span></label>
+          </div>
+          <p class="panel-copy">Only save preferences when you choose to. They persist locally in this project.</p>
+          <form id="memoryForm" class="memory-form">
+            <input id="preferenceInput" maxlength="180" placeholder="e.g. Instrumental music for studying" aria-label="Preference to remember">
+            <button type="submit" class="save-button">Save memory</button>
+          </form>
+          <div class="memory-list" id="memoryList"><div class="empty-state">Loading saved preferences…</div></div>
+          <div class="memory-actions"><span id="memoryMeta">Stored locally</span><button id="clearMemory" type="button">Clear all</button></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="panel activity-panel">
+      <div class="panel-heading">
+        <div><div class="section-kicker">TRANSPARENCY</div><h2>Verification timeline</h2></div>
+        <span class="event-count" id="eventCount">0 EVENTS</span>
+      </div>
+      <div class="timeline-empty" id="timelineEmpty"><div class="empty-orbit">◎</div><strong>Waiting for an action</strong><span>Run a demo to see each step, from intent to verified outcome.</span></div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <footer>
+      <span>Alexa TrustLayer · Hackathon concept</span>
+      <span>This is a local simulation, not an official Amazon product or live Alexa+ integration.</span>
+    </footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
